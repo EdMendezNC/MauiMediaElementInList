@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MauiApp7.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MauiApp7.Models"
+             x:Class="MauiApp7.NewPage1"
+             Title="NewPage1">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="*">
+            <CollectionView Grid.Row="0"
+                            ItemsSource="{Binding Facts}"
+                            SelectionMode="None"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodel:FactViewModel">
+                        <Frame Padding="10">
+                            <Grid RowDefinitions="*,auto"
+                                  ColumnDefinitions="*,auto">
+                                <StackLayout Grid.Column="0"
+                                             Orientation="Vertical"
+                                             VerticalOptions="StartAndExpand">
+                                    <Label Text="{Binding Description}"
+                                           VerticalOptions="Center"
+                                           FontSize="Header"
+                                           FontAttributes="Bold"
+                                           CharacterSpacing=".05" />
+                                    <Label  Text="{Binding Data}"
+                                            VerticalOptions="Center"
+                                            FontSize="Default"
+                                            Margin="5,0,0,0"
+                                            MaxLines="4" />
+                                    <CollectionView x:Name="FactItems"
+                                                    ItemsSource="{Binding FactItems}"
+                                                    SelectionMode="None"
+                                                    VerticalOptions="FillAndExpand"
+                                                    HorizontalOptions="FillAndExpand">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="viewmodel:FactItemViewModel">
+                                                <Frame Padding="10">
+                                                    <Grid RowDefinitions="*,auto"
+                                                          ColumnDefinitions="*,auto">
+                                                        <StackLayout Grid.Column="0"
+                                                                     Orientation="Vertical"
+                                                                     VerticalOptions="StartAndExpand">
+                                                            <Label  Text="{Binding Caption}"
+                                                                    VerticalOptions="Center"
+                                                                    FontSize="Default"
+                                                                    Margin="5,0,0,0" />
+                                                            <toolkit:MediaElement Source="{Binding UriStoragePath}"
+                                                                                  Aspect="AspectFill"
+                                                                                  VerticalOptions="Center"
+                                                                                  HorizontalOptions="Center">
+                                                            </toolkit:MediaElement>
+                                                        </StackLayout>
+                                                        <Rectangle Grid.Row="1"
+                                                                   Fill="Gray"
+                                                                   HeightRequest="2"
+                                                                   Margin="2"
+                                                                   HorizontalOptions="Start" />
+                                                    </Grid>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                                <Rectangle Grid.Row="1"
+                                           Fill="Gray"
+                                           HeightRequest="2"
+                                           Margin="2"
+                                           HorizontalOptions="Start" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
